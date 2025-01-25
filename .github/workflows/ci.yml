@@ -1,0 +1,33 @@
+name: Node.js CI Pipeline
+
+# Trigger the pipeline on push and pull request to the main branch
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest  # Change this to use the Windows runner
+
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Specify Node.js version
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+     
+      - name: Run tests
+        run: npm test
